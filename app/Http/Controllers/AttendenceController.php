@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Attendence\AttendenceUpload;
+use App\Imports\AttendenceImport;
 use Illuminate\Http\Request;
 use Src\AppHumanResources\Attendence\Application\Contracts\AttendenceServiceInterface;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AttendenceController extends Controller
 {
@@ -14,8 +17,26 @@ class AttendenceController extends Controller
         $this->attendenceService = $attendenceService;
     }
 
-    public function uploadAttendence(Request $request)
+    public function employeeAttendence(int $empCode)
     {
+        $data = $this->attendenceService->getEmployeeAttendence($empCode);
+
+        if(isset($data)){
+            return response()->json([
+                "error" => false,
+                "message" => "OK",
+                "data" => $data
+            ]);
+        }else{
+            return response()->json([
+                "error" => true,
+                "message" => "Empployee is not found!"
+            ]);
+        }
+    }
+
+    public function uploadAttendence(Request $request)
+    {  
         $file = $request->file('attendence_upload');
 
         //dd($savedFileName);
