@@ -14,9 +14,16 @@ class Employee extends Model
 {
     use HasFactory;
 
+    protected $table = "c1_employees";
+
     public function schedules(): HasMany
     {
         return $this->hasMany(Schedule::class, 'schedule_id', 'id');
+    }
+
+    public function attendences(): HasMany
+    {
+        return $this->hasMany(Attendence::class, "employee_id", "id");
     }
 
     public function attendence_faults(): BelongsToMany

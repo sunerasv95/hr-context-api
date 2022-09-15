@@ -14,8 +14,25 @@ class AttendenceController extends Controller
         $this->attendenceService = $attendenceService;
     }
 
-    public function getByEmployee(int $empId)
+    public function uploadAttendence(Request $request)
     {
-        return $this->attendenceService->getAllAttendenceByEmployee($empId);
+        $file = $request->file('attendence_upload');
+
+        //dd($savedFileName);
+        $arr = Excel::toArray(new AttendenceImport, $file);
+
+        $result = $this->attendenceService->uploadAttendenceFile($arr[0]);
+
+        if(isset($result)){
+            return response()->json([
+                "error" => false,
+                "message" => "Attendence data uploaded successfully",
+            ]);
+        }else{
+            return response()->json([
+                "error" => true,
+                "message" => "Attendence data uploading failed!"
+            ]);
+        }
     }
 }

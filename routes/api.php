@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('attendences')->group(function () {
-    Route::get('{empId}', [AttendenceController::class, "getByEmployee"]);
+    Route::post('uploads', [AttendenceController::class, "uploadAttendence"]);
 });
 
 

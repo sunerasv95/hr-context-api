@@ -13,6 +13,8 @@ class Attendence extends Model
 {
     use HasFactory;
 
+    protected $table = "c1_attendences";
+
     public function employee(): BelongsTo
     {
         return $this->belongsTo(Employee::class);
