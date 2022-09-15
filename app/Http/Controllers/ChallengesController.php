@@ -32,6 +32,25 @@ class ChallengesController extends Controller
             "numbers_array" => $numbersArr,
             "duplicates_found" => $resultsArr
         ]);
+    }
 
+    public function challengeFour()
+    {
+        $filesArr = [
+            "insurance.txt" => "Company A", 
+            "letter.docx" => "Company A", 
+            "Contract.docx" => "Company B"
+        ];
+
+        $results = [];
+
+        foreach($filesArr as $k => $file){
+            if(!array_key_exists($file, $results)){
+                $results[$file] = [];
+            }
+            array_push($results[$file], $k);
+        }
+
+        return response()->json($results);
     }
 }

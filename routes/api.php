@@ -27,3 +27,6 @@ Route::prefix('attendences')->group(function () {
 
 
 Route::get('challengeTwo/{inputN}', [ChallengesController::class, "challengeTwo"]);
+
+Route::get('challengeFour', [ChallengesController::class, "challengeFour"]);
+
