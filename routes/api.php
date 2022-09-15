@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AttendenceController;
+use App\Http\Controllers\ChallengesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,6 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('attendences')->group(function () {
     Route::get('{empId}', [AttendenceController::class, "getByEmployee"]);
 });
+
+
+Route::get('challengeTwo/{inputN}', [ChallengesController::class, "challengeTwo"]);
