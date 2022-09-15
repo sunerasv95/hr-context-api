@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Src\AppHumanResources\Attendence\Application\AttendenceService;
+use Src\AppHumanResources\Attendence\Application\Contracts\AttendenceServiceInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(AttendenceServiceInterface::class, AttendenceService::class);
     }
 
     /**
